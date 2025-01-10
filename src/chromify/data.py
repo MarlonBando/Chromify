@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import typer
+import kagglehub
 from torch.utils.data import Dataset
 
 
@@ -24,6 +25,9 @@ def preprocess(raw_data_path: Path, output_folder: Path) -> None:
     dataset = MyDataset(raw_data_path)
     dataset.preprocess(output_folder)
 
+def get_raw_data():
+    path = kagglehub.dataset_download("seungjunleeofficial/image-colorization")
+    print("Path to dataset files:", path)
 
 if __name__ == "__main__":
     typer.run(preprocess)
