@@ -5,4 +5,6 @@ from chromify.data import MyDataset
 
 def test_my_dataset():
     """Test the MyDataset class."""
-    pass
+    assert True
+    dataset = MyDataset("data/raw")
+    assert isinstance(dataset, Dataset)
