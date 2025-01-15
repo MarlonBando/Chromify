@@ -9,7 +9,7 @@ import os
 
 train_path : str = "~/.cache/kagglehub/datasets/seungjunleeofficial/image-colorization/versions/1/train"
 test_path : str = "~/.cache/kagglehub/datasets/seungjunleeofficial/image-colorization/versions/1/val"
-
+train_data_paths: list = sorted(glob.glob(f"{train_path}/gray/*.jpg"))
 class MyDataset(Dataset):
     """My custom dataset."""
     train_dataset = sorted(glob.glob(f"{train_path}/gray/*.jpg"))
@@ -26,11 +26,12 @@ class MyDataset(Dataset):
 
     def __len__(self) -> int:
         """Return the length of the dataset."""
+        return len(train_data_paths)
 
     def __getitem__(self, index: int):
         """Return a given sample from the dataset."""
         try:
-            img = torch.from_numpy(plt.imread(self.data_path[index]))
+            img = torch.from_numpy(plt.imread(train_path[index]))
             return img
         except Exception as e:
             print(f"Error reading image {self.data_path[index]}")
