@@ -2,9 +2,10 @@ import os
 import sys
 import torch
 import torch.nn as nn
-from model import UNetEfficientNetV2
-import torchvision.transforms as transforms
-from data import MyDataset
+from tqdm import tqdm
+from data import make_dataloaders
+from model import MainModel
+from utils import create_loss_meters, update_losses, log_results, visualize
 
 sys.path.insert(0, os.path.abspath('.'))
 
@@ -12,55 +13,32 @@ sys.path.insert(0, os.path.abspath('.'))
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Define the model, loss function, and optimizer
-model = UNetEfficientNetV2() # it has default values UNetEfficientNetV2(encoder_name='tf_efficientnetv2_s', pretrained=True)
+model = MainModel()
+model = model.to(device)
 criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 # data loader paths
-train_dir = "./data/raw/train/"
-# train_grayscale_dir = "./data/raw/train/gray"
-# train_color_dir = "./data/raw/train/color"
+data_dir = "./data/raw/"
 
-val_dir = "./data/raw/val/"
-# val_grayscale_dir = "./data/raw/val/gray"
-# val_color_dir = "./data/raw/val/color"
+train_dl = make_dataloaders(path=data_dir, split='train')
+val_dl = make_dataloaders(path=data_dir, split='val')
 
-transform = transforms.Compose([
-    transforms.Resize((256, 256)),
-    transforms.ToTensor(),
-])
+def train_model(model, train_dl, epochs, display_every=200):
+    data = next(iter(val_dl)) # getting a batch for visualizing the model output after fixed intrvals
+    for e in range(epochs):
+        loss_meter_dict = create_loss_meters() # function returing a dictionary of objects to 
+        i = 0                                  # log the losses of the complete network
+        for data in tqdm(train_dl):
+            model.setup_input(data) 
+            model.optimize()
+            update_losses(model, loss_meter_dict, count=data['L'].size(0)) # function updating the log objects
+            i += 1
+            if i % display_every == 0:
+                print(f"\nEpoch {e+1}/{epochs}")
+                print(f"Iteration {i}/{len(train_dl)}")
+                log_results(loss_meter_dict) # function to print out the losses
+                visualize(model, data, save=False) # function displaying the model's outputs
 
-train_dataset = MyDataset(train_dir, transform=transform)
-val_dataset = MyDataset(val_dir, transform=transform)
-
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=16, shuffle=True)
-val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=16, shuffle=False)
-
-def train(epochs: int = 10):
-    for epoch in range(epochs):
-        model.train()
-        train_loss = 0.0
-        for L, AB in train_loader:
-            L, AB = L.to(device), AB.to(device)
-
-            optimizer.zero_grad()
-            outputs = model(L)  # Predict AB channels
-            loss = criterion(outputs, AB)  # Compute loss
-            loss.backward()  # Backpropagation
-            optimizer.step()  # Update weights
-
-            train_loss += loss.item()
-
-        # Validation
-        model.eval()
-        val_loss = 0.0
-        with torch.no_grad():
-            for L, AB in val_loader:
-                L, AB = L.to(device), AB.to(device)
-                outputs = model(L)
-                loss = criterion(outputs, AB)
-                val_loss += loss.item()
-
-        print(f"Epoch {epoch + 1}/{epochs}, Train Loss: {train_loss / len(train_loader):.4f}, Val Loss: {val_loss / len(val_loader):.4f}")
-
-train()
+model = MainModel()
+train_model(model, train_dl, 10)
