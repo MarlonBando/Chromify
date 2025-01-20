@@ -19,7 +19,7 @@ criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 # data loader paths
-data_dir = "./data/raw/"
+data_dir = "/Users/pierfrancesco/.cache/kagglehub/datasets/seungjunleeofficial/image-colorization/versions/1/"
 
 train_dl = make_dataloaders(path=data_dir, split='train')
 val_dl = make_dataloaders(path=data_dir, split='val')
@@ -41,4 +41,6 @@ def train_model(model, train_dl, epochs, display_every=200):
                 visualize(model, data, save=False) # function displaying the model's outputs
 
 model = MainModel()
-train_model(model, train_dl, 10)
+
+if __name__ == "__main__":
+    train_model(model, train_dl, 10)
