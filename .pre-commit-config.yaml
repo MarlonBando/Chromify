@@ -24,3 +24,21 @@ repos:
         language: system
         pass_filenames: false
         args: ["--force"]
+    -   id: fix-sckit-import
+        always_run: true
+        name: fix sckit import
+        entry: python3 scripts/fix_requirements.py
+        language: python
+        pass_filenames: false
+    -   id: stage-requirements
+        name: Stage requirements.txt
+        entry: git
+        args: ["add","requirements.txt"]
+        language: system
+        pass_filenames: false
+    -   id: commit-requirements
+        name: Commit requirements.txt
+        entry: git
+        args: ["commit", "-m", "updated automatically requirements.txt", "--no-verify"]
+        language: system
+        pass_filenames: false
