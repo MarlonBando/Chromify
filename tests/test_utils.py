@@ -17,4 +17,3 @@ def test_lab_to_rgb():
     rgb_imgs = utils.lab_to_rgb(L, ab)
     assert rgb_imgs.shape == (1, 256, 256, 3)
     assert rgb_imgs.dtype == np.float32
-    assert False
