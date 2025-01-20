@@ -1,6 +1,6 @@
 import os
-from chromify.data import ColorizationDataset, make_dataloaders
-from chromify.utils import get_project_root
+from data import ColorizationDataset, make_dataloaders
+from src.chromify.utils import get_project_root
 import math
 
 test_data_dir = os.path.join(get_project_root(), "tests", "data", "raw")

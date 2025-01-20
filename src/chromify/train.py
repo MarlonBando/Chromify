@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 from model import MainModel
 from tqdm import tqdm
-from utils import create_loss_meters, get_project_root, log_results, update_losses
+from src.chromify.utils import create_loss_meters, get_project_root, log_results, update_losses
 
 from data import make_dataloaders
 

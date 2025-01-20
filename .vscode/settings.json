@@ -3,8 +3,5 @@
         "tests"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true,
-    "python.analysis.extraPaths": [
-        "./src/chromify"
-    ]
+    "python.testing.pytestEnabled": true
 }
