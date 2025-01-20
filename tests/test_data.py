@@ -1,27 +1,35 @@
 import os
-import sys
-from chromify.data import ColorizationDataset, make_dataloaders
+from src.chromify.data import ColorizationDataset, make_dataloaders
+from src.chromify.utils import get_project_root
 import math
 
-# sys.path.insert(0, os.path.abspath('..'))
+test_data_dir = os.path.join(get_project_root(), "tests", "data", "raw")
 
 def test_my_dataset():
     """Test the ColorizationDataset class."""
-    colorizationDataset = ColorizationDataset("./data/raw", split="train")
+    train_colorization_dataset = ColorizationDataset(test_data_dir, split="train")
+    val_colorization_dataset = ColorizationDataset(test_data_dir, split="val")
 
-    assert colorizationDataset.path == "./data/raw/train"
-    assert len(colorizationDataset) == len(os.listdir("./data/raw/train/gray"))
-    assert "000000000009.jpg" in colorizationDataset.image_names
+    gray_train_dir = os.path.join(test_data_dir, "train", "gray")
+
+    assert train_colorization_dataset.path == os.path.join(test_data_dir, "train")
+    assert len(train_colorization_dataset) == len(os.listdir(gray_train_dir))
+    assert all(image in train_colorization_dataset.image_names for image in os.listdir(gray_train_dir))
+
+    gray_val_dir = os.path.join(test_data_dir, "val", "gray")
+
+    assert val_colorization_dataset.path == os.path.join(test_data_dir, "val")
+    assert len(val_colorization_dataset) == len(os.listdir(gray_val_dir))
+    assert all(image in val_colorization_dataset.image_names for image in os.listdir(gray_val_dir))
 
 def test_dataloaders():
-    train_colorizationDataset = ColorizationDataset("./data/raw", split="train")
-    val_colorizationDataset = ColorizationDataset("./data/raw", split="val")
+    train_colorization_dataset = ColorizationDataset(test_data_dir, split="train")
+    val_colorization_dataset = ColorizationDataset(test_data_dir, split="val")
 
-    data_dir = "./data/raw/"
-    batch_size = 16
+    batch_size = 16 if len(train_colorization_dataset) > 16 else len(train_colorization_dataset)
 
-    train_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split='train')
-    val_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split='val')
+    train_dl = make_dataloaders(path=test_data_dir, batch_size=batch_size, split='train')
+    val_dl = make_dataloaders(path=test_data_dir, batch_size=batch_size, split='val')
 
     data = next(iter(train_dl))
     Ls, abs_ = data['L'], data['ab']
@@ -30,5 +38,5 @@ def test_dataloaders():
 
     assert Ls.shape == (batch_size, 1, 256, 256)
     assert abs_.shape == (batch_size, 2, 256, 256)
-    assert len(train_dl) == math.ceil(len(train_colorizationDataset) / batch_size) # math.ceil is because the batches cannot be floats
-    assert len(val_dl) == math.ceil(len(val_colorizationDataset) / batch_size) # math.ceil is because the batches cannot be floats
+    assert len(train_dl) == math.ceil(len(train_colorization_dataset) / batch_size) # math.ceil is because the batches cannot be floats
+    assert len(val_dl) == math.ceil(len(val_colorization_dataset) / batch_size) # math.ceil is because the batches cannot be floats

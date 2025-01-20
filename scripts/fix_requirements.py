@@ -1,3 +1,6 @@
+import re
+
+
 def fix_requirements():
     """
     When we run pipreqs it adds 'skimage==0.0' to requirments.txt
@@ -6,12 +9,17 @@ def fix_requirements():
     """
     try:
         with open("requirements.txt", "r") as file:
-            requirements = file.read()
+            requirements = file.readlines()
 
-        updated_requirements = requirements.replace("skimage==0.0", "scikit-image==0.22.0")
+        for i, requirement in enumerate(requirements):
+            requirement = requirement.strip()
+            if re.search(r"^numpy==", requirement):
+                requirements[i] = "numpy==1.26.4\n"
+            if requirement == "skimage==0.0":
+                requirements[i] = "scikit-image==0.22.0\n"
 
         with open("requirements.txt", "w") as file:
-            file.write(updated_requirements)
+            file.writelines(requirements)
 
         print("Successfully updated requirements.txt")
 
