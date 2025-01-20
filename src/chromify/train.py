@@ -19,7 +19,7 @@ criterion = nn.MSELoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 # data loader paths
-data_dir = "/Users/pierfrancesco/.cache/kagglehub/datasets/seungjunleeofficial/image-colorization/versions/1/"
+data_dir = ".data/raw/"
 
 train_dl = make_dataloaders(path=data_dir, split='train')
 val_dl = make_dataloaders(path=data_dir, split='val')
@@ -38,7 +38,7 @@ def train_model(model, train_dl, epochs, display_every=200):
                 print(f"\nEpoch {e+1}/{epochs}")
                 print(f"Iteration {i}/{len(train_dl)}")
                 log_results(loss_meter_dict) # function to print out the losses
-                visualize(model, data, save=False) # function displaying the model's outputs
+                # visualize(model, data, save=False) # function displaying the model's outputs
 
 model = MainModel()
 
