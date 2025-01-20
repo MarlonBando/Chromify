@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { Anchor, Box, Burger, Container, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './DoubleHeader.module.css';
+import { Image, Button } from '@mantine/core';
+import { IconBrandGithub } from '@tabler/icons-react';
 
 const userLinks = [
-  { link: '#', label: 'Privacy & Security' },
-  { link: '#', label: 'Account settings' },
-  { link: '#', label: 'Support options' },
+  { link: 'https://github.com/MarlonBando/Chromify', label: 'Github' },
 ];
 
 const mainLinks = [
   { link: '#', label: 'Book a demo' },
   { link: '#', label: 'Documentation' },
-  { link: '#', label: 'Community' },
+  // { link: '#', label: 'Community' },
   { link: '#', label: 'Academy' },
   { link: '#', label: 'Forums' },
 ];
@@ -37,26 +36,35 @@ export function DoubleHeader() {
     </Anchor>
   ));
 
-  const secondaryItems = userLinks.map((item) => (
-    <Anchor
-      href={item.link}
-      key={item.label}
-      onClick={(event) => event.preventDefault()}
-      className={classes.secondaryLink}
+  const secondaryItems = (
+    <Button
+      component="a"
+      href="https://github.com/MarlonBando/Chromify"
+      target="_blank"
+      variant="filled"
+      color="rgba(0, 0, 0, 1)"
+      size="lg"
+      radius="md"
+      leftSection={<IconBrandGithub size={30} />}
     >
-      {item.label}
-    </Anchor>
-  ));
+      Repository
+    </Button>
+  );
 
   return (
-    <header className={classes.header}>
+    <header className={classes.header} >
       <Container className={classes.inner}>
-        <MantineLogo size={34} />
+      <Image
+        radius="md"
+        width={50}
+        height={50}
+        src="https://skaftenicki.github.io/dtu_mlops/figures/mlops_cycle.png"
+      />
         <Box className={classes.links} visibleFrom="sm">
           <Group justify="flex-end">{secondaryItems}</Group>
-          <Group gap={0} justify="flex-end" className={classes.mainLinks}>
+          {/* <Group gap={0} justify="flex-end" className={classes.mainLinks}>
             {mainItems}
-          </Group>
+          </Group> */}
         </Box>
         <Burger
           opened={opened}
