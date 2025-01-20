@@ -9,8 +9,8 @@ def fix_requirements():
             requirements = file.read()
 
         updated_requirements = requirements.replace("skimage==0.0", "scikit-image==0.22.0")
-        updated_requirements = updated_requirements.replace("numpy==", "numpy==1.16")
-
+        updated_requirements = updated_requirements.replace("numpy==" + r"\d+\.\d+(\.\d+)?", "numpy==1.16")
+        
         with open("requirements.txt", "w") as file:
             file.write(updated_requirements)
 
