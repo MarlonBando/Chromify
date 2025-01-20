@@ -1,7 +1,7 @@
 import os
 import torch
 import numpy as np
-import src.chromify.utils
+import src.chromify.utils as utils
 
 def test_get_project_root():
     assert os.path.exists(utils.get_project_root())

@@ -1,5 +1,5 @@
 import os
-from data import ColorizationDataset, make_dataloaders
+from src.chromify.data import ColorizationDataset, make_dataloaders
 from src.chromify.utils import get_project_root
 import math
 
