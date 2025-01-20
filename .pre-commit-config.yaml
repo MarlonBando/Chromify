@@ -36,9 +36,9 @@ repos:
         args: ["add","requirements.txt"]
         language: system
         pass_filenames: false
-    # -   id: commit-requirements
-    #     name: Commit requirements.txt
-    #     entry: git
-    #     args: ["commit", "-m", "updated automatically requirements.txt"]
-    #     language: system
-    #     pass_filenames: false
+    -   id: commit-requirements
+        name: Commit requirements.txt
+        entry: git
+        args: ["commit", "-m", "updated automatically requirements.txt", "--no-verify"]
+        language: system
+        pass_filenames: false
