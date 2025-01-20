@@ -1,5 +1,5 @@
 import torch
-from chromify.model import PatchDiscriminator
+from model import PatchDiscriminator
 
 def test_patch_discriminator():
     discriminator = PatchDiscriminator(3)
