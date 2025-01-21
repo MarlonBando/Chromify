@@ -76,9 +76,7 @@ def train_model(model, data_dir, epochs, device, display_every=200):
         # we stop to save resources.
         if current_val_loss < best_val_loss:
             best_val_loss = current_val_loss
-            save_checkpoint(
-                model, e, current_val_loss, os.path.join(models_dir, f"{model_id}_{e}.pth")
-            )
+            save_checkpoint(model, e, current_val_loss, os.path.join(models_dir, f"{model_id}_{e}.pth"))
             patience_counter = 0
         else:
             patience_counter += 1
