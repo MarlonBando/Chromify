@@ -13,7 +13,7 @@ from src.chromify.utils import create_loss_meters, get_project_root, log_results
 app = typer.Typer()
 
 
-def save_checkpoint(model, optimizer, epoch, loss, path):
+def save_checkpoint(model, epoch, loss, path):
     torch.save(
         {
             "epoch": epoch,
