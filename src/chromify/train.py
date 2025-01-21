@@ -3,17 +3,12 @@ import os
 import torch
 from src.chromify.model import MainModel
 from tqdm import tqdm
-import argparse
+import typer
+from typing import Annotated
 from src.chromify.utils import create_loss_meters, get_project_root, log_results, update_losses
 from src.chromify.data import make_dataloaders
 
-def parse_args():
-    """Parse command-line arguments"""
-    parser = argparse.ArgumentParser(description="Train the model")
-    parser.add_argument(
-        "epochs", type=int, nargs="?", default=10, help="Number of epochs to train the model"
-    )
-    return parser.parse_args()
+app = typer.Typer()
 
 def train_model(model, data_dir, epochs, display_every=200):
     train_dl = make_dataloaders(path=data_dir, split="train")
@@ -34,9 +29,8 @@ def train_model(model, data_dir, epochs, display_every=200):
                 log_results(loss_meter_dict)  # function to print out the losses
                 # visualize(model, data, save=False) # function displaying the model's outputs
 
-def main():
-    args = parse_args()
-
+@app.command()
+def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10):
     # Define the device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -46,7 +40,7 @@ def main():
 
     data_dir = os.path.join(get_project_root(), "data", "raw")
     
-    train_model(model, data_dir, epochs=args.epochs)
+    train_model(model, data_dir, epochs)
 
 if __name__ == "__main__":
-    main()
+    app()

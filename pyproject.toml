@@ -20,7 +20,7 @@ requires-python = ">=3.11"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [project.scripts]
-train = "src.chromify.train:main"
+chromify = "src.chromify.train:app"
 
 [tool.setuptools]
 packages = {find = {where = [""]}}
