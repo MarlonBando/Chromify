@@ -7,7 +7,7 @@ steps:
     '-t',
     'europe-west1-docker.pkg.dev/$PROJECT_ID/chromify/train',
     '-f',
-    '<path-to-dockerfile>'
+    'docker/train.dockerfile'
   ]
 - name: 'gcr.io/cloud-builders/docker'
   id: 'Push container image'
