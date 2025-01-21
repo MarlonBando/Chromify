@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Annotated
 
 import torch
@@ -100,6 +100,40 @@ def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10):
     data_dir = os.path.join(get_project_root(), "data", "raw")
 
     train_model(model, data_dir, epochs, device)
+
+
+def show_model_info(file: str) -> str:
+    if not file.endswith(".pth"):
+        return
+
+    model_id = file.split("_")[0]
+    epoch = file.split("_")[1].replace(".pth", "")
+    day_of_year = int(model_id[:3])
+    new_year_date = datetime(datetime.now().year, 1, 1)
+    date = new_year_date + timedelta(days=day_of_year - 1)
+    day = f"{date.month:02d}-{date.day:02d}"
+    hour = model_id[3:5]
+    minute = model_id[5:7]
+    print(f"{file} | {day} | {hour}:{minute} | {epoch}")
+
+
+@app.command()
+def models():
+    models_dir = os.path.join(get_project_root(), "models")
+    if not os.path.exists(models_dir):
+        print("No models directory found")
+        return
+
+    files = os.listdir(models_dir)
+    if not files:
+        print("No models found")
+        return
+
+    print("Filename | Day | Time | Epoch")
+    print("-" * 50)
+
+    for file in files:
+        show_model_info(file)
 
 
 if __name__ == "__main__":
