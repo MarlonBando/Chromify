@@ -32,7 +32,7 @@ def load_checkpoint(model, optimizer, path):
     return checkpoint["epoch"], checkpoint["loss"]
 
 
-def train_model(model, data_dir, epochs, device, display_every=5):
+def train_model(model, data_dir, epochs, device, display_every=200):
     train_dl = make_dataloaders(path=data_dir, split="train")
     val_dl = make_dataloaders(path=data_dir, split="val")
 
