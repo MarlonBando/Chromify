@@ -6,6 +6,7 @@ from tqdm import tqdm
 import typer
 from typing import Annotated
 from src.chromify.utils import create_loss_meters, get_project_root, log_results, update_losses
+from pytorch_lightning import Trainer, ModelCheckpoint, EarlyStopping
 from src.chromify.data import make_dataloaders
 
 app = typer.Typer()
@@ -31,11 +32,19 @@ def train_model(model, data_dir, epochs, display_every=200):
 
 @app.command()
 def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10):
+    print(os.path.join(get_project_root(), "models"))
     # Define the device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Define the model, loss function, and optimizer
+    # Define the model
     model = MainModel()
+
+    models_dir = os.path.join(get_project_root(), "models")
+    checkpoint_callback = ModelCheckpoint(dirpath=models_dir, monitor="val_loss", mode="min")
+    early_stopping_callback = EarlyStopping(monitor="val_loss", patience=10, verbose=True, mode="min")
+    trainer = Trainer(callbacks=[checkpoint_callback, early_stopping_callback])
+    trainer.fit(model)
+
     model = model.to(device)
 
     data_dir = os.path.join(get_project_root(), "data", "raw")
