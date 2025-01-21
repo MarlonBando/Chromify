@@ -43,8 +43,7 @@ jobs:
     needs: test
     if: |
       ${{ github.event_name == 'push' &&
-          github.ref == 'refs/heads/main' &&
-          contains(github.event.head_commit.modified, 'docker/train.dockerfile') }}
+          github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
