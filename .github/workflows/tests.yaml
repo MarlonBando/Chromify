@@ -42,9 +42,9 @@ jobs:
       name: 'Build training container in cloud'
       needs: test
       if: |
-        ${{ github.event_name == 'push' && 
+        ${{ github.event_name == 'push' &&
             github.ref == 'refs/heads/main' &&
-            contains(github.event.head_commit.modified, 'docker/train.dockerfile') }}   
+            contains(github.event.head_commit.modified, 'docker/train.dockerfile') }}
       runs-on: ubuntu-latest
       steps:
         - name: Checkout code
