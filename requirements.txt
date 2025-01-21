@@ -4,7 +4,7 @@ kagglehub==0.3.6
 matplotlib==3.8.3
 numpy==2.2.2
 Pillow==11.1.0
-skimage==0.0
+scikit-image
 torch==1.26.4
 torchvision==0.17.2
 tqdm==4.66.2
