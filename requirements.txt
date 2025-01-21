@@ -9,4 +9,3 @@ torch==2.5.1
 torchvision==0.20.1
 tqdm==4.67.1
 typer==0.15.1
-pytorch-lightning==2.1.1

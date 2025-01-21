@@ -18,7 +18,6 @@ def save_checkpoint(model, optimizer, epoch, loss, path):
         {
             "epoch": epoch,
             "model_state_dict": model.state_dict(),
-            "optimizer_state_dict": optimizer.state_dict(),
             "loss": loss,
         },
         path,
@@ -78,7 +77,7 @@ def train_model(model, data_dir, epochs, device, display_every=200):
         if current_val_loss < best_val_loss:
             best_val_loss = current_val_loss
             save_checkpoint(
-                model, model.optimizer_G, e, current_val_loss, os.path.join(models_dir, f"{model_id}_{e}.pth")
+                model, e, current_val_loss, os.path.join(models_dir, f"{model_id}_{e}.pth")
             )
             patience_counter = 0
         else:
