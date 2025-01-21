@@ -7,17 +7,17 @@ import torch
 from io import BytesIO
 import base64
 
-app = FastAPI()
-
 @asynccontextmanager
-async def lifespan():
+async def lifespan(app: FastAPI):
     global my_model
     my_model = model.MainModel()
 
     yield
     
     del my_model
-    
+
+app = FastAPI(lifespan=lifespan)
+
 @app.post("/infer")
 async def infer(data: UploadFile = File(...)):
     input_image = Image.open(data.file).convert("L")
