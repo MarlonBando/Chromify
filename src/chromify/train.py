@@ -9,6 +9,7 @@ from tqdm import tqdm
 from src.chromify.data import make_dataloaders
 from src.chromify.model import MainModel
 from src.chromify.utils import create_loss_meters, get_project_root, log_results, update_losses
+from datetime import datetime, timedelta
 
 app = typer.Typer()
 
@@ -23,7 +24,6 @@ def save_checkpoint(model, optimizer, epoch, loss, path):
         },
         path,
     )
-
 
 def load_checkpoint(model, optimizer, path):
     checkpoint = torch.load(path)
@@ -104,6 +104,31 @@ def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10):
 
     train_model(model, data_dir, epochs, device)
 
+@app.command()
+def models():
+    models_dir = os.path.join(get_project_root(), "models")
+    if not os.path.exists(models_dir):
+        print("No models directory found")
+        return
+    
+    files = os.listdir(models_dir)
+    if not files:
+        print("No models found")
+        return
+
+    print("Filename | Day | Time | Epoch")
+    print("-" * 50)
+    for file in files:
+        if file.endswith('.pth'):
+            model_id = file.split('_')[0]
+            epoch = file.split('_')[1].replace('.pth', '')
+            day_of_year = int(model_id[:3])
+            new_year_date = datetime(datetime.now().year, 1, 1)
+            date = new_year_date + timedelta(days=day_of_year - 1)
+            day = f"{date.month:02d}-{date.day:02d}"
+            hour = model_id[3:5]
+            minute = model_id[5:7]
+            print(f"{file} | {day} | {hour}:{minute} | {epoch}")
 
 if __name__ == "__main__":
     app()
