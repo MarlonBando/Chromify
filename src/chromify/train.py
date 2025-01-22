@@ -31,9 +31,9 @@ def load_checkpoint(model, optimizer, path):
     return checkpoint["epoch"], checkpoint["loss"]
 
 
-def train_model(model, data_dir, epochs, device, display_every=200):
-    train_dl = make_dataloaders(path=data_dir, split="train")
-    val_dl = make_dataloaders(path=data_dir, split="val")
+def train_model(model, data_dir, epochs, device, batch_size, display_every=200):
+    train_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split="train")
+    val_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split="val")
 
     current_time = datetime.now()
     model_id = f"{current_time.timetuple().tm_yday:03d}" f"{current_time.hour:02d}" f"{current_time.minute:02d}"
@@ -88,7 +88,7 @@ def train_model(model, data_dir, epochs, device, display_every=200):
 
 
 @app.command()
-def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10):
+def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10, batch_size: Annotated[int, typer.Option("--batch-size", "-bs")] = 16):
     # Define the device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
@@ -99,7 +99,7 @@ def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10):
 
     data_dir = os.path.join(get_project_root(), "data", "raw")
 
-    train_model(model, data_dir, epochs, device)
+    train_model(model, data_dir, epochs, device, batch_size)
 
 
 def show_model_info(file: str) -> str:
