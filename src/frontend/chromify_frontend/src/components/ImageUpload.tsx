@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Grid, Center } from '@mantine/core';
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { callApi } from '../api';
-import { decode } from 'js-base64';
+import { decode, isValid } from 'js-base64';
 
 function ImageComparison() {
     const [colororized_image, setColorizedImage] = useState('/src/assets/000000000009 2.jpg'); // Default image path
@@ -18,8 +18,16 @@ function ImageComparison() {
             const formData = new FormData(); // Create FormData object
             formData.append('data', file); // Append the file to FormData
             callApi(formData).then((response) => {
-                console.log(response.colorized_image);
-                setColorizedImage(decode(response.colorized_image));
+                console.log("yes");
+                setColorizedImage(() => {
+                    if(isValid(response.colorized_image)){
+                        console.log("Valid base64 string");
+                        const decodedImage = `data:image/jpeg;base64,${response.colorized_image}`;
+                        console.log(decodedImage);
+                        return decodedImage;
+                    }
+                    return '/src/assets/000000000009 2.jpg';
+                });
             }).catch((error) => {
                 console.error('API call failed:', error);
             });
@@ -73,8 +81,8 @@ function ImageComparison() {
                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
                     {/* Display the image */}
                     <img
-                        src={colororized_image}
-                        alt="Uploaded Preview"
+                        src={colororized_image.startsWith('data:') ? colororized_image : `${colororized_image}`}
+                        alt="Colorized Preview"
                         style={{
                             maxWidth: '400px',
                             maxHeight: '400px',
