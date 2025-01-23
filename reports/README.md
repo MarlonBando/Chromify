@@ -285,12 +285,12 @@ Edge cases, logical errors, and integration issues might still exist.
 >
 > Answer:
 
-We created a Kanban board with all the tasks in the project. 
+We created a Kanban board with all the tasks in the project.
 For each task, the assigned person would create a branch and work on it.
 When the feature or bug fix was ready, a pull request was created
 and approved by another team member (when possible).
 For minor fixes, we pushed directly to the main branch.
-This was really helpful to track all the changes and revert 
+This was really helpful to track all the changes and revert
 them in case something went wrong.
 Additionally, with Git actions running tests on pull requests,
 we ensured the branch was functioning correctly.
@@ -425,8 +425,8 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 
 We utilized the following GCP services in our project:
 
-1. **Compute Engine**: Used to provision and manage virtual machine instances for training our machine learning models efficiently.  
-2. **Cloud Storage Bucket**: Used for storing a zip file containing the dataset, streamlining data access, and uploading trained models for secure and centralized storage.  
+1. **Compute Engine**: Used to provision and manage virtual machine instances for training our machine learning models efficiently.
+2. **Cloud Storage Bucket**: Used for storing a zip file containing the dataset, streamlining data access, and uploading trained models for secure and centralized storage.
 3. **Artifact Registry**: Used as a secure repository to build and store Docker images, ensuring consistent and reliable containerized application deployments.
 
 ### Question 18
@@ -448,12 +448,12 @@ We used the Compute Engine to train our machine learning models.
 Initially, we utilized a virtual machine instance equipped with a
 **Tesla P100 GPU** in the **West Europe 1** zone.
 This setup provided the computational power needed for
-our training tasks but we soon run out of credit. 
+our training tasks but we soon run out of credit.
 We also had problems with availability in this region and
 therefore migrated to the **Central Europe** zone.
 There, we used a virtual machine instance with an **NVIDIA T4 GPU**,
 which offered excellent performance for deep learning
-workloads while maintaining cost efficiency. 
+workloads while maintaining cost efficiency.
 Both configurations enabled us to accelerate
 the training process and effectively meet our computational requirements.
 
