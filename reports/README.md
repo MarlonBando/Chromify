@@ -74,7 +74,7 @@ will check the repositories and the code to verify your answers.
 
 * [x] Write unit tests related to the data part of your code (M16)
 * [x] Write unit tests related to model construction and or model training (M16)
-* [ ] Calculate the code coverage (M16)
+* [x] Calculate the code coverage (M16)
 * [x] Get some continuous integration running on the GitHub repository (M17)
 * [ ] Add caching and multi-os/python/pytorch testing to your continuous integration (M17)
 * [ ] Add a linting step to your continuous integration (M17)
@@ -84,8 +84,8 @@ will check the repositories and the code to verify your answers.
 * [x] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [x] Create a trigger workflow for automatically building your docker images (M21)
 * [x] Get your model training in GCP using either the Engine or Vertex AI (M21)
-* [ ] Create a FastAPI application that can do inference using your model (M22)
-* [ ] Deploy your model in GCP using either Functions or Run as the backend (M23)
+* [x] Create a FastAPI application that can do inference using your model (M22)
+* [x] Deploy your model in GCP using either Functions or Run as the backend (M23)
 * [ ] Write API tests for your application and setup continues integration for these (M24)
 * [ ] Load test your application (M24)
 * [ ] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
@@ -116,9 +116,9 @@ will check the repositories and the code to verify your answers.
 ### Question 1
 > **Enter the group number you signed up on <learn.inside.dtu.dk>**
 >
-> Answer: 74
+> Answer: 
 
---- question 1 fill here ---
+74
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -285,12 +285,12 @@ Edge cases, logical errors, and integration issues might still exist.
 >
 > Answer:
 
-We created a Kanban board with all the tasks in the project. 
+We created a Kanban board with all the tasks in the project.
 For each task, the assigned person would create a branch and work on it.
 When the feature or bug fix was ready, a pull request was created
 and approved by another team member (when possible).
 For minor fixes, we pushed directly to the main branch.
-This was really helpful to track all the changes and revert 
+This was really helpful to track all the changes and revert
 them in case something went wrong.
 Additionally, with Git actions running tests on pull requests,
 we ensured the branch was functioning correctly.
@@ -308,14 +308,7 @@ we ensured the branch was functioning correctly.
 >
 > Answer:
 
-We implemented DVC with Google Cloud, linking it to a 
-storage containing the zip file with all the data 
-to speed up the download. However, we didn't use it extensively
-because we downloaded the data directly from Kaggle,
-making DVC unnecessary for our current workflow.
-If we add data from other sources in the future,
-we plan to use DVC more actively.
-Nonetheless, DVC is integrated into our project and ready for use.
+We integrated DVC with Google Cloud, linking it to a storage bucket that contains a zip file with all the data to streamline downloads. Although we primarily downloaded the dataset directly from Kaggle, we used DVC mainly to upload and manage the trained models. Looking ahead, if we incorporate data from additional sources, we plan to utilize DVC more extensively. For now, DVC is fully integrated into our project and ready for active use.
 
 ### Question 11
 
@@ -430,7 +423,11 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 17 fill here ---
+We utilized the following GCP services in our project:
+
+1. **Compute Engine**: Used to provision and manage virtual machine instances for training our machine learning models efficiently.
+2. **Cloud Storage Bucket**: Used for storing a zip file containing the dataset, streamlining data access, and uploading trained models for secure and centralized storage.
+3. **Artifact Registry**: Used as a secure repository to build and store Docker images, ensuring consistent and reliable containerized application deployments.
 
 ### Question 18
 
@@ -445,7 +442,21 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 18 fill here ---
+### Question 18
+
+We used the Compute Engine to train our machine learning models.
+Initially, we utilized a virtual machine instance equipped with a
+**Tesla P100 GPU** in the **West Europe 1** zone.
+This setup provided the computational power needed for
+our training tasks but we soon run out of credit.
+We also had problems with availability in this region and
+therefore migrated to the **Central Europe** zone.
+There, we used a virtual machine instance with an **NVIDIA T4 GPU**,
+which offered excellent performance for deep learning
+workloads while maintaining cost efficiency.
+Both configurations enabled us to accelerate
+the training process and effectively meet our computational requirements.
+
 
 ### Question 19
 
@@ -454,7 +465,9 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 19 fill here ---
+![data archive](figures/bucket1.png)
+
+![models archive](figures/bucket2.png)
 
 ### Question 20
 
@@ -463,7 +476,7 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 20 fill here ---
+![models archive](figures/artifact.png)
 
 ### Question 21
 
@@ -487,7 +500,12 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 22 fill here ---
+We managed to train our model in the cloud by starting a compute instance with a GPU on Google Cloud and accessing it 
+through SSH. Once connected, we cloned the GitHub repository onto the instance and trained the model there. After 
+training was completed, we sent the trained models to Google Cloud Storage using DVC for efficient version control 
+and storage management. 
+We chose this approach because it was the most straightforward and allowed direct access to an NVIDIA GPU, ensuring 
+optimal performance for our training process.
 
 ## Deployment
 
@@ -569,7 +587,13 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 27 fill here ---
+Michele used all of his learning credits, and then we switched to Samer's credits, who spent the remaining balance. 
+The service that consumed the majority of our credits was the compute instance with the GPU. After running for two 
+full days, it consumed all $50 due to the high workload, including overnight usage, and because we used the NVIDIA 
+Tesla P100. 
+
+Getting started with the cloud was challenging, but once we understood the basic "rules," it became much easier and 
+more useful. Without cloud resources, we wouldn't have been able to train our model effectively.
 
 ### Question 28
 

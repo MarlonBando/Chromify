@@ -50,6 +50,23 @@ export function DoubleHeader() {
       Repository
     </Button>
   );
+  const thirdItems = (
+    <h1
+      style={{
+      display: 'inline-block',
+      marginTop: '20px',
+      padding: '10px 20px',
+      color: 'black',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      fontSize: '24px',
+      fontWeight: 'bold',
+      fontFamily: 'Arial, sans-serif',
+      }}
+    >
+      Chromify
+    </h1>
+  );
 
   return (
     <header className={classes.header} >
@@ -60,11 +77,9 @@ export function DoubleHeader() {
         height={50}
         src="https://skaftenicki.github.io/dtu_mlops/figures/mlops_cycle.png"
       />
+      <Group justify="flex-end">{thirdItems}</Group>
         <Box className={classes.links} visibleFrom="sm">
           <Group justify="flex-end">{secondaryItems}</Group>
-          {/* <Group gap={0} justify="flex-end" className={classes.mainLinks}>
-            {mainItems}
-          </Group> */}
         </Box>
         <Burger
           opened={opened}
