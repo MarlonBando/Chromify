@@ -7,6 +7,7 @@ import torch
 from io import BytesIO
 import base64
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global my_model

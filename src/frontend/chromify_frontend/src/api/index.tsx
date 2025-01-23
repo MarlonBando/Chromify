@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ApiResponseColorizedImage } from './interface';
-const API_URL = 'http://0.0.0.0:8000/infer';
+const API_URL = 'http://0.0.0.0:8080/infer';
 
 export const callApi = async (data: any) => {
     try {
