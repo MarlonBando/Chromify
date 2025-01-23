@@ -89,4 +89,4 @@ function ImageComparison() {
     );
 }
 
-export { GrayImage, ColorImage, ImageComparison };
+export { ImageComparison };
