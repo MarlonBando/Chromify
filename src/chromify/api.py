@@ -23,7 +23,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Replace with your frontend URL
+    allow_origins=["*"],  # Replace with your frontend URL
     allow_credentials=True,
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
@@ -31,9 +31,10 @@ app.add_middleware(
 
 @app.post("/infer")
 async def infer(data: UploadFile = File(...)):
+    print(data.file)
     input_image = Image.open(data.file).convert("L")
     input_tensor = torch.tensor(np.array(input_image)).unsqueeze(0).unsqueeze(0).float() / 255.0
-
+    print(data)
     my_model.setup_input({'L': input_tensor, 'ab': torch.zeros_like(input_tensor)})
     my_model.forward()
     output_tensor = my_model.fake_color.squeeze(0).detach().cpu().numpy()

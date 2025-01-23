@@ -4,8 +4,8 @@ import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { callApi } from '../api';
 import { Base64, decode } from 'js-base64';
 
-let output_image: string | null = null;
 
+const [colororized_image, setImage] = useState('/src/assets/000000000009  2.jpg'); // Default image path
 function GrayImage() {
     const [image, setImage] = useState('/src/assets/000000000009.jpg'); // Default image path
 
@@ -16,9 +16,16 @@ function GrayImage() {
         if (file) {
             const imageURL = URL.createObjectURL(file); // Create a temporary URL
             setImage(imageURL); // Update the displayed image
-            callApi({ image: Base64.encode(imageURL) }).then((response) => {   
-                console.log(output_image);
-            })
+            // Extract the binary and send it
+            const formData = new FormData(); // Create FormData object
+            formData.append('data', file); // Append the file to FormData
+            console.log(formData);
+            callApi(formData).then((response) => {
+                console.log('API response:', response);
+
+            }).catch((error) => {
+                console.error('API call failed:', error);
+            });
         }
     };
 
@@ -62,23 +69,11 @@ function GrayImage() {
 
 
 function ColorImage() {
-    const [image, setImage] = useState('/src/assets/000000000009 2.jpg'); // Default image path
-
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (!files) return;
-        const file = files[0]; // Get the selected file
-        if (file) {
-            const imageURL = URL.createObjectURL(file); // Create a temporary URL
-            setImage(imageURL); // Update the displayed image
-        }
-    };
-
     return (
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
             {/* Display the image */}
             <img
-                src={image}
+                src={colororized_image}
                 alt="Uploaded Preview"
                 style={{
                     maxWidth: '400px',
