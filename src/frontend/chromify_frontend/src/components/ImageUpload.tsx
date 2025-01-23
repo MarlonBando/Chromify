@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Grid, Center } from '@mantine/core';
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { callApi } from '../api';
-import { decode, isValid } from 'js-base64';
+import { isValid } from 'js-base64';
 
 function ImageComparison() {
     const [colororized_image, setColorizedImage] = useState('/src/assets/000000000009 2.jpg'); // Default image path
