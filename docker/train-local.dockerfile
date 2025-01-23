@@ -16,8 +16,8 @@ COPY pyproject.toml pyproject.toml
 COPY requirements.txt requirements.txt
 COPY requirements_dev.txt requirements_dev.txt
 
-RUN pip install -r requirements.txt --no-cache-dir --verbose
-RUN pip install -r requirements_dev.txt --no-cache-dir --verbose
-RUN pip install . --no-deps --no-cache-dir --verbose
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt --verbose
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements_dev.txt --verbose
+RUN --mount=type=cache,target=/root/.cache/pip pip install . --no-deps --verbose
 
 ENTRYPOINT ["python", "-u", "src/chromify/train.py"]
