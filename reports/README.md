@@ -241,7 +241,13 @@ lint.select = ["I"]
 >
 > Answer:
 
---- question 7 fill here ---
+In total, We have implemented five tests. These tests verify the following functionalities:
+- The `ColorizationDataset` class is properly initialized and handles datasets correctly.
+- The dataloaders, ensuring they provide the expected batch size and shapes for both training and validation.
+- The `PatchDiscriminator`, confirming its output shape is as expected.
+- The utility function `get_project_root`, ensuring it correctly identifies the project directory.
+- The utility function `lab_to_rgb`, ensuring it converts L*a*b* images to RGB format accurately.
+
 
 ### Question 8
 
@@ -256,7 +262,15 @@ lint.select = ["I"]
 >
 > Answer:
 
---- question 8 fill here ---
+The total code coverage of our code is as follows:
+- 40% in `data`
+- 60% in `model`
+- 100% in `utils`
+
+High code coverage is important but does not guarantee error-free code.
+It shows the percentage of executed code but not the quality of the tests.
+Edge cases, logical errors, and integration issues might still exist.
+
 
 ### Question 9
 
@@ -271,7 +285,15 @@ lint.select = ["I"]
 >
 > Answer:
 
---- question 9 fill here ---
+We created a Kanban board with all the tasks in the project. 
+For each task, the assigned person would create a branch and work on it.
+When the feature or bug fix was ready, a pull request was created
+and approved by another team member (when possible).
+For minor fixes, we pushed directly to the main branch.
+This was really helpful to track all the changes and revert 
+them in case something went wrong.
+Additionally, with Git actions running tests on pull requests,
+we ensured the branch was functioning correctly.
 
 ### Question 10
 
@@ -286,7 +308,14 @@ lint.select = ["I"]
 >
 > Answer:
 
---- question 10 fill here ---
+We implemented DVC with Google Cloud, linking it to a 
+storage containing the zip file with all the data 
+to speed up the download. However, we didn't use it extensively
+because we downloaded the data directly from Kaggle,
+making DVC unnecessary for our current workflow.
+If we add data from other sources in the future,
+we plan to use DVC more actively.
+Nonetheless, DVC is integrated into our project and ready for use.
 
 ### Question 11
 
