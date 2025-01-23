@@ -74,7 +74,7 @@ will check the repositories and the code to verify your answers.
 
 * [x] Write unit tests related to the data part of your code (M16)
 * [x] Write unit tests related to model construction and or model training (M16)
-* [ ] Calculate the code coverage (M16)
+* [x] Calculate the code coverage (M16)
 * [x] Get some continuous integration running on the GitHub repository (M17)
 * [ ] Add caching and multi-os/python/pytorch testing to your continuous integration (M17)
 * [ ] Add a linting step to your continuous integration (M17)
@@ -84,8 +84,8 @@ will check the repositories and the code to verify your answers.
 * [x] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [x] Create a trigger workflow for automatically building your docker images (M21)
 * [x] Get your model training in GCP using either the Engine or Vertex AI (M21)
-* [ ] Create a FastAPI application that can do inference using your model (M22)
-* [ ] Deploy your model in GCP using either Functions or Run as the backend (M23)
+* [x] Create a FastAPI application that can do inference using your model (M22)
+* [x] Deploy your model in GCP using either Functions or Run as the backend (M23)
 * [ ] Write API tests for your application and setup continues integration for these (M24)
 * [ ] Load test your application (M24)
 * [ ] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
@@ -116,9 +116,9 @@ will check the repositories and the code to verify your answers.
 ### Question 1
 > **Enter the group number you signed up on <learn.inside.dtu.dk>**
 >
-> Answer: 74
+> Answer: 
 
---- question 1 fill here ---
+74
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -500,7 +500,12 @@ the training process and effectively meet our computational requirements.
 >
 > Answer:
 
---- question 22 fill here ---
+We managed to train our model in the cloud by starting a compute instance with a GPU on Google Cloud and accessing it 
+through SSH. Once connected, we cloned the GitHub repository onto the instance and trained the model there. After 
+training was completed, we sent the trained models to Google Cloud Storage using DVC for efficient version control 
+and storage management. 
+We chose this approach because it was the most straightforward and allowed direct access to an NVIDIA GPU, ensuring 
+optimal performance for our training process.
 
 ## Deployment
 
@@ -582,7 +587,13 @@ the training process and effectively meet our computational requirements.
 >
 > Answer:
 
---- question 27 fill here ---
+Michele used all of his learning credits, and then we switched to Samer's credits, who spent the remaining balance. 
+The service that consumed the majority of our credits was the compute instance with the GPU. After running for two 
+full days, it consumed all $50 due to the high workload, including overnight usage, and because we used the NVIDIA 
+Tesla P100. 
+
+Getting started with the cloud was challenging, but once we understood the basic "rules," it became much easier and 
+more useful. Without cloud resources, we wouldn't have been able to train our model effectively.
 
 ### Question 28
 
