@@ -24,21 +24,20 @@ def save_checkpoint(model, epoch, loss, path):
     )
 
 
-def load_checkpoint(model, optimizer, path):
+def load_checkpoint(model, path):
     checkpoint = torch.load(path)
-    model.load_state_dict(checkpoint["model_state_dict"])
-    optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+    model.load_state_dict(checkpoint["model_state_dict"])    
     return checkpoint["epoch"], checkpoint["loss"]
 
 
-def train_model(model, data_dir, epochs, device, batch_size, display_every=200):
+def train_model(model, data_dir, epochs, device, batch_size, checkpoint_loss, display_every=200):
     train_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split="train")
     val_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split="val")
 
     current_time = datetime.now()
     model_id = f"{current_time.timetuple().tm_yday:03d}" f"{current_time.hour:02d}" f"{current_time.minute:02d}"
 
-    best_val_loss = float("inf")
+    best_val_loss = checkpoint_loss if checkpoint_loss else float("inf")
     # Patience in training refers to how many epochs
     # to wait before stopping when a monitored metric stops improving.
     # Used with Early Stopping to prevent overfitting
@@ -88,7 +87,7 @@ def train_model(model, data_dir, epochs, device, batch_size, display_every=200):
 
 
 @app.command()
-def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10, batch_size: Annotated[int, typer.Option("--batch-size", "-bs")] = 16):
+def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10, batch_size: Annotated[int, typer.Option("--batch-size", "-bs")] = 16, checkpoint: Annotated[str, typer.Option("--use-checkpoint", "-c")] = None):
     # Define the device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
@@ -97,9 +96,19 @@ def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10, batch_siz
     model = MainModel()
     model = model.to(device)
 
+    checkpoint_loss = None
+
+    if checkpoint:
+        checkpoint_path = os.path.join(get_project_root(), "models", checkpoint)
+        if not os.path.exists(checkpoint_path):
+            print("Checkpoint not found")
+            return
+
+        _, checkpoint_loss = load_checkpoint(model, checkpoint_path)
+
     data_dir = os.path.join(get_project_root(), "data", "raw")
 
-    train_model(model, data_dir, epochs, device, batch_size)
+    train_model(model, data_dir, epochs, device, checkpoint_loss, batch_size)
 
 
 def show_model_info(file: str) -> str:
