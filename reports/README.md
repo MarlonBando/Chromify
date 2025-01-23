@@ -308,14 +308,7 @@ we ensured the branch was functioning correctly.
 >
 > Answer:
 
-We implemented DVC with Google Cloud, linking it to a 
-storage containing the zip file with all the data 
-to speed up the download. However, we didn't use it extensively
-because we downloaded the data directly from Kaggle,
-making DVC unnecessary for our current workflow.
-If we add data from other sources in the future,
-we plan to use DVC more actively.
-Nonetheless, DVC is integrated into our project and ready for use.
+We integrated DVC with Google Cloud, linking it to a storage bucket that contains a zip file with all the data to streamline downloads. Although we primarily downloaded the dataset directly from Kaggle, we used DVC mainly to upload and manage the trained models. Looking ahead, if we incorporate data from additional sources, we plan to utilize DVC more extensively. For now, DVC is fully integrated into our project and ready for active use.
 
 ### Question 11
 
@@ -430,7 +423,11 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 17 fill here ---
+We utilized the following GCP services in our project:
+
+1. **Compute Engine**: Used to provision and manage virtual machine instances for training our machine learning models efficiently.  
+2. **Cloud Storage Bucket**: Used for storing a zip file containing the dataset, streamlining data access, and uploading trained models for secure and centralized storage.  
+3. **Artifact Registry**: Used as a secure repository to build and store Docker images, ensuring consistent and reliable containerized application deployments.
 
 ### Question 18
 
@@ -445,7 +442,21 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 18 fill here ---
+### Question 18
+
+We used the Compute Engine to train our machine learning models.
+Initially, we utilized a virtual machine instance equipped with a
+**Tesla P100 GPU** in the **West Europe 1** zone.
+This setup provided the computational power needed for
+our training tasks but we soon run out of credit. 
+We also had problems with availability in this region and
+therefore migrated to the **Central Europe** zone.
+There, we used a virtual machine instance with an **NVIDIA T4 GPU**,
+which offered excellent performance for deep learning
+workloads while maintaining cost efficiency. 
+Both configurations enabled us to accelerate
+the training process and effectively meet our computational requirements.
+
 
 ### Question 19
 
@@ -454,7 +465,9 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 19 fill here ---
+![data archive](figures/bucket1.png)
+
+![models archive](figures/bucket2.png)
 
 ### Question 20
 
@@ -463,7 +476,7 @@ Nonetheless, DVC is integrated into our project and ready for use.
 >
 > Answer:
 
---- question 20 fill here ---
+![models archive](figures/artifact.png)
 
 ### Question 21
 
