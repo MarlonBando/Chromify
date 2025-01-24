@@ -522,6 +522,9 @@ optimal performance for our training process.
 > *to the API to make it more ...*
 >
 > Answer:
+We did manage to write an API for our model. We used FastAPI to do this. We created an endpoint /infer that accepts an image file upload. The image is processed by converting it to a grayscale image and then transforming it into a tensor. This tensor is then passed to our pre-trained model, which generates a colorized version of the image. The output tensor is converted back to an image and encoded in base64 format to be returned as a JSON response.
+
+We also added CORS middleware to allow cross-origin requests from any origin, which is useful for frontend integration. This setup ensures that our API can be accessed from different domains, making it more flexible and easier to integrate with various frontend applications.
 
 --- question 23 fill here ---
 
