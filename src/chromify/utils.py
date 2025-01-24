@@ -6,7 +6,6 @@ import numpy as np
 import torch
 from skimage.color import lab2rgb
 
-
 class AverageMeter:
     def __init__(self):
         self.reset()
