@@ -407,11 +407,7 @@ We have not implemented Weights and Biases into our code, thus we are not able t
 > Answer:
 
 We do not think that our code is perfect, but our model has been taken from someone else's work (see in [README.md](../../README.md)). Even though we have adapted the code to our necessities, we do not have the courage to do big modifications to the model in fear of just downgrading its performance.  
-<<<<<<< HEAD
-To debug, we used the built-in debugger from Visual Studio Code. Sometimes we used the print function as an alternative to check some specific values of variables.
-=======
-To debug, we used the built-in debugger from Visual Studio Code. Sometimes we used the print function as an alternative to check some specific values of variables.
->>>>>>> a934ecef34971a994f2a7d905d83e8ba338cb06a
+To debug, we used the built-in debugger from Visual Studio Code. Sometimes we used the print function as an alternative to check some specific values of variables. It has also happened that there was not an obvious solution to our problem, so we turned to ChatGPT or GitHub Copilot to seek for possible reasons on why our code was wrong.
 
 ## Working in the cloud
 
