@@ -522,6 +522,9 @@ optimal performance for our training process.
 > *to the API to make it more ...*
 >
 > Answer:
+We did manage to write an API for our model. We used FastAPI to do this. We created an endpoint /infer that accepts an image file upload. The image is processed by converting it to a grayscale image and then transforming it into a tensor. This tensor is then passed to our pre-trained model, which generates a colorized version of the image. The output tensor is converted back to an image and encoded in base64 format to be returned as a JSON response.
+
+We also added CORS middleware to allow cross-origin requests from any origin, which is useful for frontend integration. This setup ensures that our API can be accessed from different domains, making it more flexible and easier to integrate with various frontend applications.
 
 --- question 23 fill here ---
 
@@ -537,8 +540,12 @@ optimal performance for our training process.
 > *worked. Afterwards we deployed it in the cloud, using ... . To invoke the service an user would call*
 > *`curl -X POST -F "file=@file.json"<weburl>`*
 >
-> Answer:
+> Answer
+> We successfully containerized our API using Docker and pushed the image to a container registry for deployment. The Dockerfile was designed to build a lightweight image, using `python:3.11-slim` as the base. The FastAPI application was configured to run with `uvicorn`, exposing the appropriate port as defined by the `$PORT` environment variable.
 
+Initially, we tested the container locally by building and running it with a specific port (e.g., `docker run -e PORT=8080 -p 8080:8080`). This confirmed that the API was functional locally. However, when deploying to the cloud (using Google Cloud Run), the service failed to pass the health check. This issue stemmed from a misconfiguration related to the `$PORT` environment variable, which was not properly set or expanded within the container runtime. 
+
+Despite our efforts to debug and resolve the issue by modifying the Dockerfile and testing various configurations, the service was not able to start listening on the correct port. This has delayed the cloud deployment, but the image remains ready for redeployment once the issue is fully resolved.
 --- question 24 fill here ---
 
 ### Question 25
@@ -611,7 +618,7 @@ When using Samer's credits we realized that other GPUs would give a much better 
 >
 > Answer:
 
-We implemented a frontend for our API. Our model takes images in black and white and colorizes them, so we wanted to provide a way for the end-user to be able to upload their own image and get the output for their input.
+We implemented a frontend for our API to provide an interactive interface for end-users. Since our model takes black-and-white images as input and colorizes them, the frontend allows users to upload their own images and view the colorized output. The frontend was built using Vite and TypeScript, with Mantine as the component library. Mantine's prebuilt components enabled us to quickly design a clean and responsive interface. To communicate with the backend API, we used Axios, which simplified the process of making HTTP requests and handling responses. This setup ensures a smooth user experience and seamless interaction between the frontend and backend services.
 
 ### Question 29
 
