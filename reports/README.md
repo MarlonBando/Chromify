@@ -540,8 +540,12 @@ We also added CORS middleware to allow cross-origin requests from any origin, wh
 > *worked. Afterwards we deployed it in the cloud, using ... . To invoke the service an user would call*
 > *`curl -X POST -F "file=@file.json"<weburl>`*
 >
-> Answer:
+> Answer
+> We successfully containerized our API using Docker and pushed the image to a container registry for deployment. The Dockerfile was designed to build a lightweight image, using `python:3.11-slim` as the base. The FastAPI application was configured to run with `uvicorn`, exposing the appropriate port as defined by the `$PORT` environment variable.
 
+Initially, we tested the container locally by building and running it with a specific port (e.g., `docker run -e PORT=8080 -p 8080:8080`). This confirmed that the API was functional locally. However, when deploying to the cloud (using Google Cloud Run), the service failed to pass the health check. This issue stemmed from a misconfiguration related to the `$PORT` environment variable, which was not properly set or expanded within the container runtime. 
+
+Despite our efforts to debug and resolve the issue by modifying the Dockerfile and testing various configurations, the service was not able to start listening on the correct port. This has delayed the cloud deployment, but the image remains ready for redeployment once the issue is fully resolved.
 --- question 24 fill here ---
 
 ### Question 25
