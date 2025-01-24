@@ -2,6 +2,20 @@
 
 Chromify is a deep learning project that takes a grayscale image as input and generates a colorized version as output.
 
+## How to run the project locally
+Run this commands in the root folder to build the docker image
+```sh
+docker build -f docker/frontend.dockerfile . -t frontend:latest
+docker build -f docker/api.dockerfile . -t api:latest
+```
+After building the image you can run the container with these commands in two different terminal
+```sh
+docker run -p 8080:8080 --rm -it api:latest
+```
+```sh
+docker run -p 5137:5137 --rm -it frontend:latest
+```
+After running the containers access this page to try out: http://localhost:5137/
 ## Description
 
 Many times, when we check history, the information and documentation available comes accompanied by images. Even though it is true that these images are capable of giving us a better perception of how things were in that specific moment in time there is a very important thing missing the further back in history we look: color.
