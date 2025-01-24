@@ -26,6 +26,7 @@ def save_checkpoint(model, epoch, loss, path):
 
 def load_checkpoint(model, path):
     checkpoint = torch.load(path)
+    print(checkpoint)
     model.load_state_dict(checkpoint["model_state_dict"])    
     return checkpoint["epoch"], checkpoint["loss"]
 
