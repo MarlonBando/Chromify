@@ -18,6 +18,8 @@ def save_checkpoint(model, epoch, loss, path):
         {
             "epoch": epoch,
             "model_state_dict": model.state_dict(),
+            "opt_G_state_dict": model.opt_G.state_dict(),
+            "opt_D_state_dict": model.opt_D.state_dict(),
             "loss": loss,
         },
         path,
