@@ -660,4 +660,5 @@ We implemented a frontend for our API. Our model takes images in black and white
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
---- question 31 fill here ---
+Student s240033 was in charge of finding which were the different options of the models and which one could be the best fit for the task at hand. After finding which was it, he looked into how to implement it. Since it was a U-Net, and these networks are not directly found in huggingface he worked into trying to combine a decoder from huggingface and create an encoder from scratch. After many tries, this did not seem to work as expected, so he went back on to the research progress and read some articles. He found a GitHub repository that was accompanied by an article. We used the model of this repository but he adapted the code to our necessities and the format of our data. Combined with the adaptations of the code, some unit tests were created to ensure that some methods were working properly.  
+He also included the CLI commands to easily execute the training of the model and customize the parameters of execution. He partially worked on saving checkpoints for the model and the initialization of the training from a specific checkpoint.
