@@ -26,12 +26,11 @@ def save_checkpoint(model, epoch, loss, path):
 
 def load_checkpoint(model, path):
     checkpoint = torch.load(path)
-    print(checkpoint)
     model.load_state_dict(checkpoint["model_state_dict"])    
     return checkpoint["epoch"], checkpoint["loss"]
 
 
-def train_model(model, data_dir, epochs, device, batch_size, checkpoint_loss, display_every=200):
+def train_model(model, data_dir, epochs, batch_size, checkpoint_loss, display_every=200):
     train_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split="train")
     val_dl = make_dataloaders(path=data_dir, batch_size=batch_size, split="val")
 
@@ -109,7 +108,7 @@ def train(epochs: Annotated[int, typer.Option("--epochs", "-e")] = 10, batch_siz
 
     data_dir = os.path.join(get_project_root(), "data", "raw")
 
-    train_model(model, data_dir, epochs, device, checkpoint_loss, batch_size)
+    train_model(model, data_dir, epochs, batch_size, checkpoint_loss)
 
 
 def show_model_info(file: str) -> str:
