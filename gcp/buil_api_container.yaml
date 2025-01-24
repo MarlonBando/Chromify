@@ -1,0 +1,26 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build container image'
+  args: [
+    'build',
+    '.',
+    '-t',
+    'api:latest',
+    '-f',
+    'docker/api.dockerfile'
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Tag container image'
+  args: [
+    'tag',
+    'api:latest',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/chromify/api:latest'
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Push container image'
+  args: [
+    'push',
+    'europe-west1-docker.pkg.dev/$PROJECT_ID/chromify/api:latest'
+  ]
+options:
+  logging: CLOUD_LOGGING_ONLY

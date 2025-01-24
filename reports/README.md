@@ -106,17 +106,17 @@ will check the repositories and the code to verify your answers.
 
 * [ ] Write some documentation for your application (M32)
 * [ ] Publish the documentation to GitHub Pages (M32)
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
+* [x] Revisit your initial project description. Did the project turn out as you wanted?
 * [ ] Create an architectural diagram over your MLOps pipeline
-* [ ] Make sure all group members have an understanding about all parts of the project
-* [ ] Uploaded all your code to GitHub
+* [x] Make sure all group members have an understanding about all parts of the project
+* [x] Uploaded all your code to GitHub
 
 ## Group information
 
 ### Question 1
 > **Enter the group number you signed up on <learn.inside.dtu.dk>**
 >
-> Answer: 
+> Answer:
 
 74
 
@@ -143,7 +143,9 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 3 fill here ---
+We used the third-party framework **Pillow (PIL)** in our project, which is a powerful library for image processing in Python. Specifically, we used its functionality to load and manipulate images, such as converting uploaded images to grayscale using `.convert("L")` and saving the processed output as a PNG file. Pillow's integration made it easy to handle various image formats and perform operations like resizing, transformation, and conversion, which were essential for preprocessing inputs and postprocessing outputs of our model.
+
+Additionally, we leveraged the **base64** module alongside Pillow to encode the processed images into a base64 string. This was crucial for transmitting the colorized images from our API to the frontend in a lightweight and efficient manner. The simplicity and flexibility of Pillow significantly streamlined the image-handling aspect of our project, enabling us to focus more on building and deploying the API.
 
 ## Coding environment
 
@@ -285,15 +287,11 @@ Edge cases, logical errors, and integration issues might still exist.
 >
 > Answer:
 
-We created a Kanban board with all the tasks in the project.
-For each task, the assigned person would create a branch and work on it.
-When the feature or bug fix was ready, a pull request was created
-and approved by another team member (when possible).
+We created a Kanban board with all the tasks in the project. For each task, the assigned person would create a branch and work on it.
+When the feature or bug fix was ready, a pull request was created and approved by another team member (when possible).
 For minor fixes, we pushed directly to the main branch.
-This was really helpful to track all the changes and revert
-them in case something went wrong.
-Additionally, with Git actions running tests on pull requests,
-we ensured the branch was functioning correctly.
+This was really helpful to track all the changes and revert them in case something went wrong.
+Additionally, with Git actions running tests on pull requests, we ensured the branch was functioning correctly.
 
 ### Question 10
 
@@ -325,7 +323,9 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 11 fill here ---
+[Here](https://github.com/MarlonBando/Chromify/actions/runs/12888763830) you can see one of our workflows. We have different unit tests that are run with pytest. These are run automatically when a push or a pull request to *main* has been done.
+The tests are executed on Ubuntu, Windows, and MacOs, by two different python versions, python 3.11 and 3.12.
+
 
 ## Running code and tracking experiments
 
@@ -344,7 +344,9 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 12 fill here ---
+We created a command in the *pyproject.toml* file and combined it with the functionality provided by the *typer* package.
+Here it is an example: ``` chromify train --epochs 25 --batch-size 256 --use-checkpoint "0212215_12.pth" ```.
+All the arguments of the train command are optional, since they have default values.
 
 ### Question 13
 
@@ -359,7 +361,7 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 13 fill here ---
+We haven't use config files and we didn't do any experiment
 
 ### Question 14
 
@@ -376,7 +378,7 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 14 fill here ---
+We have not implemented Weights and Biases into our code, thus we are not able to provide the asked screenshots.
 
 ### Question 15
 
@@ -391,7 +393,10 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 15 fill here ---
+- Developed three Docker images:
+  - **Training**: Used for training the ML model.
+  - **API Backend**: Hosted the model for inference.
+  - **Frontend**: Served the user interface.
 
 ### Question 16
 
@@ -406,7 +411,8 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 16 fill here ---
+We do not think that our code is perfect, but our model has been taken from someone else's work (see in [README.md](../../README.md)). Even though we have adapted the code to our necessities, we do not have the courage to do big modifications to the model in fear of just downgrading its performance.
+To debug, we used the built-in debugger from Visual Studio Code. Sometimes we used the print function as an alternative to check some specific values of variables. It has also happened that there was not an obvious solution to our problem, so we turned to ChatGPT or GitHub Copilot to seek for possible reasons on why our code was wrong.
 
 ## Working in the cloud
 
@@ -485,7 +491,7 @@ the training process and effectively meet our computational requirements.
 >
 > Answer:
 
---- question 21 fill here ---
+![cloud build history](figures/cloud_history.png)
 
 ### Question 22
 
@@ -500,11 +506,11 @@ the training process and effectively meet our computational requirements.
 >
 > Answer:
 
-We managed to train our model in the cloud by starting a compute instance with a GPU on Google Cloud and accessing it 
-through SSH. Once connected, we cloned the GitHub repository onto the instance and trained the model there. After 
-training was completed, we sent the trained models to Google Cloud Storage using DVC for efficient version control 
-and storage management. 
-We chose this approach because it was the most straightforward and allowed direct access to an NVIDIA GPU, ensuring 
+We managed to train our model in the cloud by starting a compute instance with a GPU on Google Cloud and accessing it
+through SSH. Once connected, we cloned the GitHub repository onto the instance and trained the model there. After
+training was completed, we sent the trained models to Google Cloud Storage using DVC for efficient version control
+and storage management.
+We chose this approach because it was the most straightforward and allowed direct access to an NVIDIA GPU, ensuring
 optimal performance for our training process.
 
 ## Deployment
@@ -521,8 +527,9 @@ optimal performance for our training process.
 > *to the API to make it more ...*
 >
 > Answer:
+We did manage to write an API for our model. We used FastAPI to do this. We created an endpoint /infer that accepts an image file upload. The image is processed by converting it to a grayscale image and then transforming it into a tensor. This tensor is then passed to our pre-trained model, which generates a colorized version of the image. The output tensor is converted back to an image and encoded in base64 format to be returned as a JSON response.
 
---- question 23 fill here ---
+We also added CORS middleware to allow cross-origin requests from any origin, which is useful for frontend integration. This setup ensures that our API can be accessed from different domains, making it more flexible and easier to integrate with various frontend applications.
 
 ### Question 24
 
@@ -536,9 +543,12 @@ optimal performance for our training process.
 > *worked. Afterwards we deployed it in the cloud, using ... . To invoke the service an user would call*
 > *`curl -X POST -F "file=@file.json"<weburl>`*
 >
-> Answer:
+> Answer
+> We successfully containerized our API using Docker and pushed the image to a container registry for deployment. The Dockerfile was designed to build a lightweight image, using `python:3.11-slim` as the base. The FastAPI application was configured to run with `uvicorn`, exposing the appropriate port as defined by the `$PORT` environment variable.
 
---- question 24 fill here ---
+Initially, we tested the container locally by building and running it with a specific port (e.g., `docker run -e PORT=8080 -p 8080:8080`). This confirmed that the API was functional locally. However, when deploying to the cloud (using Google Cloud Run), the service failed to pass the health check. This issue stemmed from a misconfiguration related to the `$PORT` environment variable, which was not properly set or expanded within the container runtime.
+
+Despite our efforts to debug and resolve the issue by modifying the Dockerfile and testing various configurations, the service was not able to start listening on the correct port. This has delayed the cloud deployment, but the image remains ready for redeployment once the issue is fully resolved.
 
 ### Question 25
 
@@ -553,7 +563,7 @@ optimal performance for our training process.
 >
 > Answer:
 
---- question 25 fill here ---
+We didn't test our api.
 
 ### Question 26
 
@@ -568,7 +578,10 @@ optimal performance for our training process.
 >
 > Answer:
 
---- question 26 fill here ---
+We did not manage to implement monitoring.
+
+If we had implemented monitoring, we would have used the **prometheus-client** library to expose metrics such as inference latency, API response times, and resource usage directly from the application.
+
 
 ## Overall discussion of project
 
@@ -587,13 +600,14 @@ optimal performance for our training process.
 >
 > Answer:
 
-Michele used all of his learning credits, and then we switched to Samer's credits, who spent the remaining balance. 
-The service that consumed the majority of our credits was the compute instance with the GPU. After running for two 
-full days, it consumed all $50 due to the high workload, including overnight usage, and because we used the NVIDIA 
-Tesla P100. 
+Michele used all of his learning credits, and then we switched to Samer's credits, who spent the remaining balance.
+The service that consumed the majority of our credits was the compute instance with the GPU. After running for two
+full days, it consumed all $50 due to the high workload, including overnight usage, and because we used the NVIDIA
+Tesla P100.
 
-Getting started with the cloud was challenging, but once we understood the basic "rules," it became much easier and 
+Getting started with the cloud was challenging, but once we understood the basic "rules," it became much easier and
 more useful. Without cloud resources, we wouldn't have been able to train our model effectively.
+When using Samer's credits we realized that other GPUs would give a much better performance for a very little increase in price.
 
 ### Question 28
 
@@ -609,7 +623,7 @@ more useful. Without cloud resources, we wouldn't have been able to train our mo
 >
 > Answer:
 
---- question 28 fill here ---
+We implemented a frontend for our API to provide an interactive interface for end-users. Since our model takes black-and-white images as input and colorizes them, the frontend allows users to upload their own images and view the colorized output. The frontend was built using Vite and TypeScript, with Mantine as the component library. Mantine's prebuilt components enabled us to quickly design a clean and responsive interface. To communicate with the backend API, we used Axios, which simplified the process of making HTTP requests and handling responses. This setup ensures a smooth user experience and seamless interaction between the frontend and backend services.
 
 ### Question 29
 
@@ -626,7 +640,8 @@ more useful. Without cloud resources, we wouldn't have been able to train our mo
 >
 > Answer:
 
---- question 29 fill here ---
+![architecture diagram](figures/scheme.png)
+
 
 ### Question 30
 
@@ -640,7 +655,7 @@ more useful. Without cloud resources, we wouldn't have been able to train our mo
 >
 > Answer:
 
---- question 30 fill here ---
+The biggest challenge we faced was deploying the Docker container with the API to the cloud. Unfortunately, we were unable to get it to work. We encountered issues with the port, and the solutions provided in the course material and online resources did not resolve the problem. Additionally, we experienced some difficulty training the model, as our cloud credits ran out mid-training.
 
 ### Question 31
 
@@ -658,4 +673,9 @@ more useful. Without cloud resources, we wouldn't have been able to train our mo
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
---- question 31 fill here ---
+Student s240033 was in charge of finding which were the different options of the models and which one could be the best fit for the task at hand. After finding which was it, he looked into how to implement it. Since it was a U-Net, and these networks are not directly found in huggingface he worked into trying to combine a decoder from huggingface and create an encoder from scratch. After many tries, this did not seem to work as expected, so he went back on to the research progress and read some articles. He found a GitHub repository that was accompanied by an article. We used the model of this repository but he adapted the code to our necessities and the format of our data. Combined with the adaptations of the code, some unit tests were created to ensure that some methods were working properly.
+He also included the CLI commands to easily execute the training of the model and customize the parameters of execution. He partially worked on saving checkpoints for the model and the initialization of the training from a specific checkpoint.
+
+Student s243121 managed the GitHub repository, pre-commit hooks, and GitHub Actions. He handled cloud resources (compute, storage, artifacts), implemented data version control, and created the training Docker image. Additionally, they assisted with the cloud-based training process.
+
+Student s242943 handled both backend and frontend development, created the Docker image for both of them, and contributed to the deployment process and data handling.
