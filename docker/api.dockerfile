@@ -15,4 +15,4 @@ WORKDIR /src
 ENV PYTHON_PATH=/
 
 #ENTRYPOINT ["uvicorn", "chromify.api:app","--host", "0.0.0.0", "--port", $PORT]
-CMD exec uvicorn chromify.api:app --host 0.0.0.0 --port $PORT
+CMD uvicorn chromify.api:app --host 0.0.0.0 --port ${PORT:-8080}
