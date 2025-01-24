@@ -618,7 +618,7 @@ When using Samer's credits we realized that other GPUs would give a much better 
 >
 > Answer:
 
-We implemented a frontend for our API. Our model takes images in black and white and colorizes them, so we wanted to provide a way for the end-user to be able to upload their own image and get the output for their input.
+We implemented a frontend for our API to provide an interactive interface for end-users. Since our model takes black-and-white images as input and colorizes them, the frontend allows users to upload their own images and view the colorized output. The frontend was built using Vite and TypeScript, with Mantine as the component library. Mantine's prebuilt components enabled us to quickly design a clean and responsive interface. To communicate with the backend API, we used Axios, which simplified the process of making HTTP requests and handling responses. This setup ensures a smooth user experience and seamless interaction between the frontend and backend services.
 
 ### Question 29
 
