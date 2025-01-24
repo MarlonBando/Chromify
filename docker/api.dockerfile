@@ -6,10 +6,9 @@ RUN apt update && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 ENV PYTHON_PATH=/
-WORKDIR /src
 
+WORKDIR /src
 COPY models/ models/
-COPY streamlit/ streamlit/
 COPY requirements.txt requirements.txt
 
 
