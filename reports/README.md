@@ -106,10 +106,10 @@ will check the repositories and the code to verify your answers.
 
 * [ ] Write some documentation for your application (M32)
 * [ ] Publish the documentation to GitHub Pages (M32)
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
+* [x] Revisit your initial project description. Did the project turn out as you wanted?
 * [ ] Create an architectural diagram over your MLOps pipeline
-* [ ] Make sure all group members have an understanding about all parts of the project
-* [ ] Uploaded all your code to GitHub
+* [x] Make sure all group members have an understanding about all parts of the project
+* [x] Uploaded all your code to GitHub
 
 ## Group information
 
@@ -285,15 +285,11 @@ Edge cases, logical errors, and integration issues might still exist.
 >
 > Answer:
 
-We created a Kanban board with all the tasks in the project.
-For each task, the assigned person would create a branch and work on it.
-When the feature or bug fix was ready, a pull request was created
-and approved by another team member (when possible).
+We created a Kanban board with all the tasks in the project. For each task, the assigned person would create a branch and work on it.  
+When the feature or bug fix was ready, a pull request was created and approved by another team member (when possible).
 For minor fixes, we pushed directly to the main branch.
-This was really helpful to track all the changes and revert
-them in case something went wrong.
-Additionally, with Git actions running tests on pull requests,
-we ensured the branch was functioning correctly.
+This was really helpful to track all the changes and revert them in case something went wrong.  
+Additionally, with Git actions running tests on pull requests, we ensured the branch was functioning correctly.
 
 ### Question 10
 
@@ -325,7 +321,9 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 11 fill here ---
+[Here](https://github.com/MarlonBando/Chromify/actions/runs/12888763830) you can see one of our workflows. We have different unit tests that are run with pytest. These are run automatically when a push or a pull request to *main* has been done.  
+The tests are executed on Ubuntu, Windows, and MacOs, by two different python versions, python 3.11 and 3.12.
+
 
 ## Running code and tracking experiments
 
@@ -344,7 +342,9 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 12 fill here ---
+We created a command in the *pyproject.toml* file and combined it with the functionality provided by the *typer* package.  
+Here it is an example: ``` chromify train --epochs 25 --batch-size 256 --use-checkpoint "0212215_12.pth" ```.  
+All the arguments of the train command are optional, since they have default values.
 
 ### Question 13
 
@@ -376,7 +376,7 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 14 fill here ---
+We have not implemented Weights and Biases into our code, thus we are not able to provide the asked screenshots.
 
 ### Question 15
 
@@ -406,7 +406,8 @@ We integrated DVC with Google Cloud, linking it to a storage bucket that contain
 >
 > Answer:
 
---- question 16 fill here ---
+We do not think that our code is perfect, but our model has been taken from someone else's work (see in [README.md](../../README.md)). Even though we have adapted the code to our necessities, we do not have the courage to do big modifications to the model in fear of just downgrading its performance.  
+To debug, we used the built-in debugger from Visual Studio Code. Sometimes we used the print function as an alternative to check some specific values of variables. It has also happened that there was not an obvious solution to our problem, so we turned to ChatGPT or GitHub Copilot to seek for possible reasons on why our code was wrong.
 
 ## Working in the cloud
 
@@ -485,7 +486,7 @@ the training process and effectively meet our computational requirements.
 >
 > Answer:
 
---- question 21 fill here ---
+![cloud build history](figures/cloud_history.png)
 
 ### Question 22
 
@@ -593,7 +594,8 @@ full days, it consumed all $50 due to the high workload, including overnight usa
 Tesla P100. 
 
 Getting started with the cloud was challenging, but once we understood the basic "rules," it became much easier and 
-more useful. Without cloud resources, we wouldn't have been able to train our model effectively.
+more useful. Without cloud resources, we wouldn't have been able to train our model effectively.  
+When using Samer's credits we realized that other GPUs would give a much better performance for a very little increase in price.
 
 ### Question 28
 
@@ -609,7 +611,7 @@ more useful. Without cloud resources, we wouldn't have been able to train our mo
 >
 > Answer:
 
---- question 28 fill here ---
+We implemented a frontend for our API. Our model takes images in black and white and colorizes them, so we wanted to provide a way for the end-user to be able to upload their own image and get the output for their input.
 
 ### Question 29
 

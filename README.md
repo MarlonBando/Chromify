@@ -16,6 +16,9 @@ In case of choosing GAN we would use one of two specialized frameworks for them:
 
 Out of the three, we have chosen U-Net due being the most balanced option. It gives the best results when compared to the computational cost and implementation cost.
 
+Update: the implementation of a U-Net from scratch, or using existing models from huggingface, is not straightforward. After many unsuccessful tries, we ended up finding ourselves delvening on the research process, and we found the [following implementation](https://github.com/mberkay0/image-colorization) by the user mberkay0. His work consists of the combination of a U-Net with a GAN. He also wrote an article that can be read [here](https://towardsdatascience.com/colorizing-black-white-images-with-u-net-and-conditional-gan-a-tutorial-81b2df111cd8).  
+His code was adapted to our data and our necessities.
+
 ## Project structure
 
 The directory structure of the project looks like this:
