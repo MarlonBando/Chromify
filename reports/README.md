@@ -142,7 +142,7 @@ will check the repositories and the code to verify your answers.
 > *package to do ... and ... in our project*.
 >
 > Answer:
-> We used the third-party framework **Pillow (PIL)** in our project, which is a powerful library for image processing in Python. Specifically, we used its functionality to load and manipulate images, such as converting uploaded images to grayscale using `.convert("L")` and saving the processed output as a PNG file. Pillow's integration made it easy to handle various image formats and perform operations like resizing, transformation, and conversion, which were essential for preprocessing inputs and postprocessing outputs of our model.
+ We used the third-party framework **Pillow (PIL)** in our project, which is a powerful library for image processing in Python. Specifically, we used its functionality to load and manipulate images, such as converting uploaded images to grayscale using `.convert("L")` and saving the processed output as a PNG file. Pillow's integration made it easy to handle various image formats and perform operations like resizing, transformation, and conversion, which were essential for preprocessing inputs and postprocessing outputs of our model.
 
 Additionally, we leveraged the **base64** module alongside Pillow to encode the processed images into a base64 string. This was crucial for transmitting the colorized images from our API to the frontend in a lightweight and efficient manner. The simplicity and flexibility of Pillow significantly streamlined the image-handling aspect of our project, enabling us to focus more on building and deploying the API.
 
