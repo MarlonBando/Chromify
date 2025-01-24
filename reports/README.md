@@ -595,7 +595,7 @@ Tesla P100.
 
 Getting started with the cloud was challenging, but once we understood the basic "rules," it became much easier and 
 more useful. Without cloud resources, we wouldn't have been able to train our model effectively.  
-When using Samer's credits we realized that other 
+When using Samer's credits we realized that other GPUs would give a much better performance for a very little increase in price.
 
 ### Question 28
 
