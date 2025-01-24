@@ -10,7 +10,7 @@ COPY README.md README.md
 COPY pyproject.toml pyproject.toml
 
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
-RUN pip install . --no-deps --no-cache-dir --verbose
+#RUN pip install . --no-deps --no-cache-dir --verbose
 WORKDIR /src
 ENV PYTHON_PATH=/
 
